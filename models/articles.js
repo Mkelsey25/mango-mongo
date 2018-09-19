@@ -13,10 +13,6 @@ var articleSchema = new Schema({
     url: {
         type: String, 
         required: true
-    }, 
-    note: {
-        type: String, 
-        ref: "note"
     }
 }); 
 

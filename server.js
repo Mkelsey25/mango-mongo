@@ -37,19 +37,19 @@ app.get("/scrape", function(req, res) {
             //console.log(this);
             var result = {};
             result.title = $(this).find("div").children("a").text();
-            result.link = $(this).find("div").children("a").attr("href");
+            result.url = $(this).find("div").children("a").attr("href");
             result.summary = $(this).find("div .eg-balloon-blog-layout-1-element-6").text();
             
-            console.log(result);
             //console.log(result);
-
+                //console.log(db.articles);
           db.articles.create(result)
           .then(function(newArticle) {
-              //console.log( "NEW ARTICLE: " + newArticle);
+            console.log( "NEW ARTICLE: " + newArticle);  
           })
           .catch(function(err) {
-              //return res.json(err);
+              console.log(err);
           });
+          
         });
 
         res.send("scraping was successful.");
@@ -61,7 +61,7 @@ app.get("/articles", function(res, req) {
         res.json(newArticle);
     })
     .catch(function(err) {
-        res.json(err);
+        //res.json(err);
     });
 });
 
@@ -70,7 +70,7 @@ app.get("articles/:id", function(req,res) {
     .populate("note").then(function(newArticle) {
         res.json(newArticle);
     }).catch(function(err) {
-        res.json(err);
+        //res.json(err);
     })
 })
 
@@ -80,7 +80,7 @@ app.post("/articles/:id", function(req,res) {
     }).then(function(newArticle) {
         res.json(newArticle);
     }).catch(function(err) {
-        res.json(err);
+        //res.json(err);
     });
 });
 
