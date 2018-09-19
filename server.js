@@ -11,7 +11,6 @@ var cheerio = require("cheerio");
 app.use(logger("dev"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
-app.use(bodyParser.json());
 //Heroku Set-up
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
@@ -47,7 +46,7 @@ app.get("/scrape", function(req, res) {
             console.log( "NEW ARTICLE: " + newArticle);  
           })
           .catch(function(err) {
-              console.log(err);
+              //console.log(err);
           });
           
         });
@@ -56,19 +55,21 @@ app.get("/scrape", function(req, res) {
     });
 });
 
-app.get("/articles", function(res, req) {
+app.get("/articles", function(req, res) {
     db.articles.find({}).then(function(newArticle) {
+        //console.log(newArticle);
         res.json(newArticle);
+        //mongooseResponse.json(newArticle);
     })
     .catch(function(err) {
-        //res.json(err);
+        console.log(err);
     });
 });
 
 app.get("articles/:id", function(req,res) {
     db.articles.findOne({_id: req.params.id})
     .populate("note").then(function(newArticle) {
-        res.json(newArticle);
+        res.send(newArticle);
     }).catch(function(err) {
         //res.json(err);
     })
