@@ -34,12 +34,14 @@ app.get("/scrape", function(req, res) {
         var $ = cheerio.load(response.data);
        // console.log(response.data);
         $("div .eg-balloon-blog-layout-1-content").each(function(i, article) {
+            //console.log(this);
             var result = {};
-            result.title = $(this).children("a .esg-entry-content eg-balloon-blog-layout-1-content-element-1").text();
-            result.summary = $(this).children("div .esg-entry-content eg-balloon-blog-layout-1-content-element-6").text();
-            result.link = $(this).children("a .esg-entry-content eg-balloon-blog-layout-1-content-element-1").attr("href");
-            console.log(this.type);
-            //console.log(result);
+            result.title = $(this).find("div").children("a").html();
+
+            //result.summary = $(this).children("div .esg-entry-content eg-balloon-blog-layout-1-content-element-6").text();
+            //result.link = $(this).children("a .esg-entry-content eg-balloon-blog-layout-1-content-element-1").attr("href");
+            
+            console.log(result);
 
           db.articles.create(result)
           .then(function(newArticle) {
