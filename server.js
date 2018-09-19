@@ -36,12 +36,12 @@ app.get("/scrape", function(req, res) {
         $("div .eg-balloon-blog-layout-1-content").each(function(i, article) {
             //console.log(this);
             var result = {};
-            result.title = $(this).find("div").children("a").html();
-
-            //result.summary = $(this).children("div .esg-entry-content eg-balloon-blog-layout-1-content-element-6").text();
-            //result.link = $(this).children("a .esg-entry-content eg-balloon-blog-layout-1-content-element-1").attr("href");
+            result.title = $(this).find("div").children("a").text();
+            result.link = $(this).find("div").children("a").attr("href");
+            result.summary = $(this).find("div .eg-balloon-blog-layout-1-element-6").text();
             
             console.log(result);
+            //console.log(result);
 
           db.articles.create(result)
           .then(function(newArticle) {
