@@ -8,7 +8,7 @@ var db = require("./models");
 var PORT = 3000;
 var logger = require("morgan");
 var cheerio = require("cheerio");
-app.unsubscribe(logger("dev"));
+app.use(logger("dev"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(bodyParser.json());
@@ -29,21 +29,24 @@ app.set("view engine", "handlebars");
 //scraping 
 
 app.get("/scrape", function(req, res) {
-    axios.get('http://www.bca.co.id/id/Individu/Sarana/Kurs-dan-Suku-Bunga/Kurs-dan-Kalkulator').then(function(req, res) {
-        console.log(res);
-        var $ = cheerio.load(res.data);
-        $("a").each(function(i, article) {
-            res.title = $(this).children("div esg-content").text();
-            res.summary = $(this).children("a").text();
-          res.link = $(this).children("a").attr("href");
+    axios.get('https://www.mango.org/blog/').then(function(response) {
+       
+        var $ = cheerio.load(response.data);
+       // console.log(response.data);
+        $("div .eg-balloon-blog-layout-1-content").each(function(i, article) {
+            var result = {};
+            result.title = $(this).children("a .esg-entry-content eg-balloon-blog-layout-1-content-element-1").text();
+            result.summary = $(this).children("div .esg-entry-content eg-balloon-blog-layout-1-content-element-6").text();
+            result.link = $(this).children("a .esg-entry-content eg-balloon-blog-layout-1-content-element-1").attr("href");
+            console.log(this.type);
+            //console.log(result);
 
-
-          db.articles.create(res)
+          db.articles.create(result)
           .then(function(newArticle) {
-              console.log(newArticle);
+              //console.log( "NEW ARTICLE: " + newArticle);
           })
           .catch(function(err) {
-              return res.json(err);
+              //return res.json(err);
           });
         });
 
