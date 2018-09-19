@@ -66,12 +66,12 @@ app.get("/articles", function(req, res) {
     });
 });
 
-app.get("articles/:id", function(req,res) {
+app.get("/articles/:id", function(req, res) {
     db.articles.findOne({_id: req.params.id})
     .populate("note").then(function(newArticle) {
-        res.send(newArticle);
+        res.json(newArticle);
     }).catch(function(err) {
-        //res.json(err);
+        res.json(err);
     })
 })
 
