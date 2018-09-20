@@ -25,7 +25,17 @@ app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 
-//scraping 
+//Handlebars routes 
+
+app.get("/", function(req, res) {
+    res.render("index");
+});
+
+app.get("/saved", function(req,res) {
+    res.redirect("saved");
+});
+
+//Scraping
 
 app.get("/scrape", function(req, res) {
     axios.get('https://www.mango.org/blog/').then(function(response) {
@@ -59,7 +69,6 @@ app.get("/articles", function(req, res) {
     db.articles.find({}).then(function(newArticle) {
         //console.log(newArticle);
         res.json(newArticle);
-        //mongooseResponse.json(newArticle);
     })
     .catch(function(err) {
         console.log(err);
