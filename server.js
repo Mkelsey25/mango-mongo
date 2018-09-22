@@ -5,7 +5,7 @@ var mongoose = require("mongoose");
 var app = express();
 var axios = require("axios");
 var db = require("./models");
-var PORT = 3000;
+var PORT = 8080;
 var logger = require("morgan");
 var cheerio = require("cheerio");
 app.use(logger("dev"));
@@ -28,6 +28,7 @@ app.set("view engine", "handlebars");
 //Handlebars routes 
 
 app.get("/", function(req, res) {
+    console.log("I'm dying !!!");
     res.render("index");
 });
 

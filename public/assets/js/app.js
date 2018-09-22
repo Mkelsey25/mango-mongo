@@ -1,3 +1,4 @@
+/*var fs = require("fs");
 var articles = require("../../../models/articles");
 
 var articleTemplateScript = $("#article-template").html();
@@ -23,8 +24,7 @@ var context = {
 };
 
 var theCompiledHtml = theTemplate(context);
-$("#theContextPlaceholder").html(theCompiledHtml);
-
+$("#theContextPlaceholder").html(theCompiledHtml);*/
 //Block Helper Function 
 //Ability to reuse code that will be executed at various points in the application
 
