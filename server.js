@@ -3,6 +3,7 @@ var bodyParser = require("body-parser");
 var exphbs = require("express-handlebars");
 var mongoose = require("mongoose");
 var app = express();
+var path = require("path");
 var axios = require("axios");
 var db = require("./models");
 var PORT = 8080;
@@ -20,7 +21,7 @@ mongoose.connect(MONGODB_URI, function(){
 });
 
 //Set up Handlebars engine
-
+app.set("views", path.join(__dirname, "views"));
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
