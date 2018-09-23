@@ -33,9 +33,9 @@ app.get("/", function(req, res) {
     res.render("index");
 });
 
-app.get("/saved", function(req,res) {
+/*app.get("/saved", function(req,res) {
     res.redirect("saved");
-});
+});*/
 
 //Scraping
 
@@ -95,6 +95,10 @@ app.post("/articles/:id", function(req,res) {
         //res.json(err);
     });
 });
+app.get("/saved", function(req, res) {
+    console.log("I'm saved!");
+    res.render("saved");
+})
 
 app.listen(PORT, function() {
     console.log("App running on port " + PORT + "!");
