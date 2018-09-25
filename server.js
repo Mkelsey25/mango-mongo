@@ -83,8 +83,8 @@ app.get("/articles/:id", function(req, res) {
         res.json(newArticle);
     }).catch(function(err) {
         res.json(err);
-    })
-})
+    });
+});
 
 app.post("/articles/:id", function(req,res) {
     db.notes.create(req.body).then(function(newNote) {
@@ -95,6 +95,18 @@ app.post("/articles/:id", function(req,res) {
         //res.json(err);
     });
 });
+
+ app.post("/articles/:id", function(req,res) {
+    db.notes.create(req.body).then(function(newNote) {
+        return db.articles.findOneAndUpdate({ _id: req.params.id }, { note: newNote._id }, { new: true });
+    }).then(function(newArticle) {
+        res.json(newArticle);
+    }).catch(function(err) {
+        //res.json(err);
+    });
+});   
+
+
 app.get("/saved", function(req, res) {
     console.log("I'm saved!");
     res.render("saved");

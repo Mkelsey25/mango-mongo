@@ -12,7 +12,11 @@ var articleSchema = new Schema({
     }, 
     url: {
         type: String, 
-        required: true
+        required: true,
+    },
+    saved: {
+        type: Boolean,
+        default: false
     }
 }); 
 
