@@ -44,9 +44,12 @@ $(document).on("click", ".saveArticle", function() {
                     console.log("After: " + articleToBeSaved.saved);
                     savedArticles.push(articleToBeSaved);
                     
-                    $("#saved").append(articleToBeSaved.title + "<br>");
+                    $("#saved").append("<form> " + 
+                   "<input id='" + articleToBeSaved._id + "' type='text'> " +
+                    "<button" + " class='saveNote'" + " id='" + articleToBeSaved._id + "'>Create Note</button> " +
+                  "</form>" + articleToBeSaved.title + "<br>");
                     $("#saved").append(articleToBeSaved.url + "<br>");
-                    $("#saved").append(articleToBeSaved.summary + "<br>");
+                    $("#saved").append(articleToBeSaved.summary + "<br>" +" <div id='" + articleToBeSaved._id + "'>" + "Note Will Be Placed Here</div>");
                     $("#" + id).remove();
                     
                 }
@@ -66,7 +69,7 @@ $(document).on("click", ".saveArticle", function() {
 
 
 
-
+//$(document).on("click", "button .saveNote")
 
 
 

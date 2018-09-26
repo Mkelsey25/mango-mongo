@@ -26,7 +26,7 @@ app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 
-//Handlebars routes 
+//ROUTES//
 
 app.get("/", function(req, res) {
     console.log("I'm dying !!!");
@@ -79,11 +79,11 @@ app.get("/articles", function(req, res) {
 
 app.get("/articles/:id", function(req, res) {
     db.articles.findOne({_id: req.params.id})
-    .populate("note").then(function(newArticle) {
+    /*.populate("note").then(function(newArticle) {
         res.json(newArticle);
     }).catch(function(err) {
         res.json(err);
-    });
+    });*/
 });
 
 app.post("/articles/:id", function(req,res) {
@@ -107,14 +107,14 @@ app.post("/articles/:id", function(req,res) {
 });   
 
 
-app.get("/saved", function(req, res) {
+/*app.get("/saved", function(req, res) {
     console.log("I'm saved!");
     res.render("saved");
-})
+});*/
 
 app.listen(PORT, function() {
     console.log("App running on port " + PORT + "!");
-  });
+});
   
 
 
