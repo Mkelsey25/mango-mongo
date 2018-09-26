@@ -10,7 +10,7 @@ $(".btn").on("click", function() {
 
             for(var i = 0; i < 5; i++) {
                 if(data[i].saved === false) {
-                    $("#content").append("Title: " + data[i].title + "<button id="  + data[i]._id + " class='saveArticle'>Save Article</button>" + "<br>");
+                    $("#content").append("Title: " + data[i].title + "<button id="  + data[i]._id + " class='saveArticle'>Save Article</button>" +  "<button id="  + data[i]._id + " class='deleteArticle'>Delete Article</button>" + "<br>");
                     $("#content").append("URL: " + data[i].url + "<br>");
                     $("#content").append("Summary: " + data[i].summary + "<br>");
                 }
@@ -44,13 +44,13 @@ $(document).on("click", ".saveArticle", function() {
                     console.log("After: " + articleToBeSaved.saved);
                     savedArticles.push(articleToBeSaved);
                     
-                    $("#saved").append("<form> " + 
+                    $("#saved").append("<form id='" + articleToBeSaved._id + "'> " + 
                    "<input id='" + articleToBeSaved._id + "' type='text'> " + "</form>" +
-                    "<button" + " class='saveNote'" + " id='" + articleToBeSaved._id + "'>Create Note</button> " +
+                    "<button" + " class='saveNote'" + " id='" + articleToBeSaved._id + "'>Create Note</button> " + "<button class='deleteArticle' id='" + articleToBeSaved._id + "'>Delete Button</button> "
                    + articleToBeSaved.title + "<br>");
-                    $("#saved").append(articleToBeSaved.url + "<br>");
-                    $("#saved").append(articleToBeSaved.summary + "<br>" +" <div id='" + articleToBeSaved._id + "'>" + "Note: </div>");
-                    $("#" + id).remove();
+                    $("#saved").append("<section id='" + articleToBeSaved._id + "'>" + articleToBeSaved.url + "<br>");
+                    $("#saved").append(articleToBeSaved.summary + "<br>" +" <div id='" + articleToBeSaved._id + "'>" + "Note: </div>" + "</section>");
+                    $(" button[#" + id + "]").remove();
                     
                 }
                 else {
@@ -75,10 +75,39 @@ $(document).on("click", ".saveNote", function() {
     //console.log(btnId)
     var inputId = $("input[type=text][id=" + btnId + "]").val();
     console.log(inputId);
-    $("div[id=" + btnId + "]").append(inputId);
+    $("div[id=" + btnId + "]").append("<h3 class='noteBody' id='" + btnId + "'>" + inputId + "</h3> " + "<button class='deleteNote' id='" + btnId + "'>Delete Note</button>");
     
 });
 
+
+
+$(document).on("click", ".deleteNote", function() {
+    var btnId = $(this).attr("id");
+    console.log("Wow did u rlly just click me?!?!");
+    var noteToDelete = $("h3[id=" + btnId + "]");
+    noteToDelete.remove();
+    var buttonToDelete = $("button[class=deleteNote][id=" + btnId + "]");
+    buttonToDelete.remove();
+});
+
+$(document).on("click", ".deleteArticle", function() {
+    var btnId = $(this).attr("id");
+    console.log("OUCH");
+    var formToDelete = $("form[id=" + btnId + "]");
+    formToDelete.remove();
+
+
+});
+/*$(document).on("click", ".deleteArticle", function() {
+    var btnId = $(this).attr("id");
+    console.log("Oooooo, do that again!");
+    var formToDelete = $("form[id=" + btnId + "]");
+    formToDelete.remove();
+    var btnToDelete = $("button[id=" + btnId + "]");
+    btnToDelete.remove();
+    var articleToDelete = $("div[id=" + btnId + "]");
+    articleToDelete.remove();
+});*/
 
 
 });
