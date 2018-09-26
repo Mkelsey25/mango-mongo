@@ -1,5 +1,3 @@
-
-
 $(document).ready(function() {
 var savedArticles = [];
 $(".btn").on("click", function() {
@@ -12,9 +10,9 @@ $(".btn").on("click", function() {
 
             for(var i = 0; i < 5; i++) {
                 if(data[i].saved === false) {
-                $("#content").append("Title: " + data[i].title + "<button id="  + data[i]._id + " class='saveArticle'>Save Article</button>" + "<br>");
-                $("#content").append("URL: " + data[i].url + "<br>");
-                $("#content").append("Summary: " + data[i].summary + "<br>");
+                    $("#content").append("Title: " + data[i].title + "<button id="  + data[i]._id + " class='saveArticle'>Save Article</button>" + "<br>");
+                    $("#content").append("URL: " + data[i].url + "<br>");
+                    $("#content").append("Summary: " + data[i].summary + "<br>");
                 }
             };
 
@@ -50,6 +48,7 @@ $(document).on("click", ".saveArticle", function() {
                     $("#saved").append(articleToBeSaved.url + "<br>");
                     $("#saved").append(articleToBeSaved.summary + "<br>");
                     $("#" + id).remove();
+                    
                 }
                 else {
                     //console.log("I don't think you're ready for this jelly.");
