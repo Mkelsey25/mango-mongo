@@ -45,11 +45,11 @@ $(document).on("click", ".saveArticle", function() {
                     savedArticles.push(articleToBeSaved);
                     
                     $("#saved").append("<form> " + 
-                   "<input id='" + articleToBeSaved._id + "' type='text'> " +
+                   "<input id='" + articleToBeSaved._id + "' type='text'> " + "</form>" +
                     "<button" + " class='saveNote'" + " id='" + articleToBeSaved._id + "'>Create Note</button> " +
-                  "</form>" + articleToBeSaved.title + "<br>");
+                   + articleToBeSaved.title + "<br>");
                     $("#saved").append(articleToBeSaved.url + "<br>");
-                    $("#saved").append(articleToBeSaved.summary + "<br>" +" <div id='" + articleToBeSaved._id + "'>" + "Note Will Be Placed Here</div>");
+                    $("#saved").append(articleToBeSaved.summary + "<br>" +" <div id='" + articleToBeSaved._id + "'>" + "Note: </div>");
                     $("#" + id).remove();
                     
                 }
@@ -69,7 +69,15 @@ $(document).on("click", ".saveArticle", function() {
 
 
 
-//$(document).on("click", "button .saveNote")
+$(document).on("click", ".saveNote", function() {
+    //console.log("OMG U CLICKED ME!");
+    var btnId = $(this).attr("id");
+    //console.log(btnId)
+    var inputId = $("input[type=text][id=" + btnId + "]").val();
+    console.log(inputId);
+    $("div[id=" + btnId + "]").append(inputId);
+    
+});
 
 
 

@@ -17,7 +17,7 @@ var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines
 
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI, function(){
-    console.log("I'm connected to something, but I'm not sure what that is really...");
+    console.log("I'm connected to Mongo!");
 });
 
 //Set up Handlebars engine
@@ -29,7 +29,6 @@ app.set("view engine", "handlebars");
 //ROUTES//
 
 app.get("/", function(req, res) {
-    console.log("I'm dying !!!");
     res.render("index");
 });
 
